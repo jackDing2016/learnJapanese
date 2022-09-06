@@ -69,13 +69,32 @@ public class SimpleExerciseServiceImpl implements SimpleExerciseService {
             new SingleWord("ro", "ろ", null));
 
     @Override
-    public String getARandomHiragana() {
-        return HIRAGANA_ARRAY[ThreadLocalRandom.current().nextInt(0, HIRAGANA_ARRAY.length)];
+    public String getARandomSingleWordPronunciation() {
+        return singleWordList.get( ThreadLocalRandom.current().nextInt(0, singleWordList.size()) ).getPronunciation();
     }
 
     @Override
-    public String getARandomSingleWordPronunciation() {
-        return singleWordList.get( ThreadLocalRandom.current().nextInt(0, singleWordList.size()) ).getPronunciation();
+    public String getARandomSingleWordHiragana() {
+        return singleWordList.get( ThreadLocalRandom.current().nextInt(0, singleWordList.size()) ).getHiragana();
+    }
+
+    @Override
+    public String getARandomSingleWordKatakana() {
+        return singleWordList.get( ThreadLocalRandom.current().nextInt(0, singleWordList.size()) ).getKatakana();
+    }
+
+    @Override
+    public boolean answerThePronunciationOfHiragana(String hiragana, String answer) {
+        if ( Strings.isEmpty( answer ) ) return false;
+        if (pronunciationMap().get(answer) == null ) return false;
+        return hiragana.equals(pronunciationMap().get(answer).getHiragana());
+    }
+
+    @Override
+    public boolean answerThePronunciationOfKatakana(String katakana, String answer) {
+        if ( Strings.isEmpty( answer ) ) return false;
+        if (pronunciationMap().get(answer) == null ) return false;
+        return katakana.equals(pronunciationMap().get(answer).getHiragana());
     }
 
     @Override
@@ -88,6 +107,14 @@ public class SimpleExerciseServiceImpl implements SimpleExerciseService {
     }
 
     @Override
+    public boolean answerTheKatakanaOfPronunciation(String pronunciation, String answer) {
+        if (Strings.isEmpty( answer )) return false;
+        if ( katakanaMap().get(answer) == null ) return false;
+
+        return pronunciation.equals( katakanaMap().get(answer).getPronunciation() );
+    }
+
+    @Override
     public Map<String, SingleWord> pronunciationMap() {
         return singleWordList.stream().collect(Collectors.toMap( SingleWord::getPronunciation, Function.identity() ) );
     }
@@ -95,5 +122,10 @@ public class SimpleExerciseServiceImpl implements SimpleExerciseService {
     @Override
     public Map<String, SingleWord> hiraganaMap() {
         return singleWordList.stream().collect(Collectors.toMap( SingleWord::getHiragana, Function.identity() ) );
+    }
+
+    @Override
+    public Map<String, SingleWord> katakanaMap() {
+        return singleWordList.stream().collect(Collectors.toMap( SingleWord::getKatakana, Function.identity() ) );
     }
 }
