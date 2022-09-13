@@ -27,36 +27,36 @@ public class SimpleExerciseServiceImpl implements SimpleExerciseService {
     };
 
     final static List<SingleWord> singleWordList = List.of(
-            new SingleWord("a", "あ", null),
-            new SingleWord("i", "い", null),
-            new SingleWord("u", "う", null),
-            new SingleWord("e", "え", null),
-            new SingleWord("o", "お", null),
-            new SingleWord("ka", "か", null),
-            new SingleWord("ki", "き", null),
-            new SingleWord("ku", "く", null),
-            new SingleWord("ke", "け", null),
-            new SingleWord("ko", "こ", null),
-            new SingleWord("sa", "さ", null),
-            new SingleWord("shi", "し", null),
-            new SingleWord("su", "す", null),
-            new SingleWord("se", "せ", null),
-            new SingleWord("so", "そ", null),
-            new SingleWord("ta", "た", null),
-            new SingleWord("chi", "ち", null),
-            new SingleWord("tsu", "つ", null),
-            new SingleWord("te", "て", null),
-            new SingleWord("to", "と", null),
-            new SingleWord("na", "な", null),
-            new SingleWord("ni", "に", null),
-            new SingleWord("nu", "ぬ", null),
-            new SingleWord("ne", "ね", null),
-            new SingleWord("no", "の", null),
-            new SingleWord("ha", "は", null),
-            new SingleWord("hi", "ひ", null),
-            new SingleWord("fu", "ふ", null),
-            new SingleWord("he", "へ", null),
-            new SingleWord("ho", "ほ", null),
+            new SingleWord("a", "あ", "ア"),
+            new SingleWord("i", "い", "イ"),
+            new SingleWord("u", "う", "ウ"),
+            new SingleWord("e", "え", "エ"),
+            new SingleWord("o", "お", "オ"),
+            new SingleWord("ka", "か", "カ"),
+            new SingleWord("ki", "き", "キ"),
+            new SingleWord("ku", "く", "ク"),
+            new SingleWord("ke", "け", "ケ"),
+            new SingleWord("ko", "こ", "コ"),
+            new SingleWord("sa", "さ", "サ"),
+            new SingleWord("shi", "し", "シ"),
+            new SingleWord("su", "す", "ス"),
+            new SingleWord("se", "せ", "セ"),
+            new SingleWord("so", "そ", "ソ"),
+            new SingleWord("ta", "た", "タ"),
+            new SingleWord("chi", "ち", "チ"),
+            new SingleWord("tsu", "つ", "ツ"),
+            new SingleWord("te", "て", "テ"),
+            new SingleWord("to", "と", "ト"),
+            new SingleWord("na", "な", "ナ"),
+            new SingleWord("ni", "に", "ニ"),
+            new SingleWord("nu", "ぬ", "ヌ"),
+            new SingleWord("ne", "ね", "ネ"),
+            new SingleWord("no", "の", "ノ"),
+            new SingleWord("ha", "は", "ハ"),
+            new SingleWord("hi", "ひ", "ヒ"),
+            new SingleWord("fu", "ふ", "フ"),
+            new SingleWord("he", "へ", "ヘ"),
+            new SingleWord("ho", "ほ", "ホ"),
             new SingleWord("ma", "ま", null),
             new SingleWord("mi", "み", null),
             new SingleWord("mu", "む", null),
@@ -66,7 +66,8 @@ public class SimpleExerciseServiceImpl implements SimpleExerciseService {
             new SingleWord("ri", "り", null),
             new SingleWord("ru", "る", null),
             new SingleWord("re", "れ", null),
-            new SingleWord("ro", "ろ", null));
+            new SingleWord("ro", "ろ", null)
+    );
 
     @Override
     public String getARandomSingleWordPronunciation() {
@@ -126,6 +127,6 @@ public class SimpleExerciseServiceImpl implements SimpleExerciseService {
 
     @Override
     public Map<String, SingleWord> katakanaMap() {
-        return singleWordList.stream().collect(Collectors.toMap( SingleWord::getKatakana, Function.identity() ) );
+        return singleWordList.stream().collect(Collectors.toMap( SingleWord::getKatakana, Function.identity(), ( o, n ) -> n ) );
     }
 }
